@@ -1,23 +1,19 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
-public class StartLostKattle : MonoBehaviour
+public class Enemy1 : MonoBehaviour
 {
-    [SerializeField] GameObject LostKattle;
+    [SerializeField] GameObject enemy1;
     [SerializeField] public float move = 0.01f;
-    [SerializeField] int damage = 1;
     string tile = "first";
     string before;
-    GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
-        before = "forward";
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        tile = "forward";
+        before = "right";
     }
 
     // Update is called once per frame
@@ -26,10 +22,6 @@ public class StartLostKattle : MonoBehaviour
         Vector3 pos = this.gameObject.transform.position;
         switch (tile)
         {
-            case "first":
-                this.gameObject.transform.position = new Vector3(pos.x, pos.y + move, pos.z);
-                break;
-
 
             case "left":
                 switch (before)
@@ -73,6 +65,29 @@ public class StartLostKattle : MonoBehaviour
                         break;
                 }
                 break;
+
+
+            case "forward":
+                switch (before)
+                {
+                    case "forward":
+                        this.gameObject.transform.position = new Vector3(pos.x, pos.y + move, pos.z);
+                        break;
+
+                    case "right":
+                        this.gameObject.transform.position = new Vector3(pos.x + move, pos.y, pos.z);
+                        break;
+
+                    case "left":
+                        this.gameObject.transform.position = new Vector3(pos.x - move, pos.y, pos.z);
+                        break;
+
+                    case "down":
+                        this.gameObject.transform.position = new Vector3(pos.x, pos.y - move, pos.z);
+                        break;
+                }
+                break;
+
         }
 
 
@@ -134,14 +149,5 @@ public class StartLostKattle : MonoBehaviour
 
             }
         }
-
-        //ìGÇ…è’ìÀÇµÇΩéûÇÃèàóù
-        if (collision.gameObject.tag == "Enemy")
-        {
-            gameManager.EnemyHit(damage);
-        }
-            
-        
     }
- }
-
+}
