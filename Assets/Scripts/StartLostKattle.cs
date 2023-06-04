@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StartLostKattle : MonoBehaviour
 {
     [SerializeField] GameObject LostKattle;
     [SerializeField] public float move = 0.01f;
     [SerializeField] int damage = 1;
+    public static string sceen_name;
     string tile = "first";
     string before;
     GameManager gameManager;
@@ -18,6 +20,7 @@ public class StartLostKattle : MonoBehaviour
     {
         before = "forward";
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        sceen_name = SceneManager.GetActiveScene().name;
     }
 
     // Update is called once per frame
@@ -139,9 +142,7 @@ public class StartLostKattle : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             gameManager.EnemyHit(damage);
-        }
-            
-        
+        }    
     }
  }
 
