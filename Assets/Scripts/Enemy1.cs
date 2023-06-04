@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using static UnityEditor.PlayerSettings;
 
 public class Enemy1 : MonoBehaviour
 {
@@ -88,6 +90,28 @@ public class Enemy1 : MonoBehaviour
                 }
                 break;
 
+            case "down":
+                switch (before)
+                {
+                    case "forward":
+                        this.gameObject.transform.position = new Vector3(pos.x, pos.y + move, pos.z);
+                        break;
+
+                    case "right":
+                        this.gameObject.transform.position = new Vector3(pos.x + move, pos.y, pos.z);
+                        break;
+
+                    case "left":
+                        this.gameObject.transform.position = new Vector3(pos.x - move, pos.y, pos.z);
+                        break;
+
+                    case "down":
+                        this.gameObject.transform.position = new Vector3(pos.x, pos.y - move, pos.z);
+                        break;
+                }
+                break;
+
+
         }
 
 
@@ -149,5 +173,29 @@ public class Enemy1 : MonoBehaviour
 
             }
         }
+
+        //ï«Ç…ìñÇΩÇ¡ÇΩéûÇÃèàóù
+        if (collision.gameObject.tag == "Wall")
+        {
+            tile = "down";
+
+            switch (before)
+            {
+                case "forward":
+                    before = "down";
+                    break;
+                case "right":
+                    before = "left";
+                    break;
+                case "left":
+                    before = "right";
+                    break;
+                case "down":
+                    before = "forward";
+                    break;
+            }
+        }
     }
+
+    
 }

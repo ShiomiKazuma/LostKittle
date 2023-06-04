@@ -12,7 +12,7 @@ public class StartLostKattle : MonoBehaviour
     [SerializeField] public float move = 0.01f;
     [SerializeField] int damage = 1;
     public static string sceen_name;
-    string tile = "first";
+    string tile = "forward";
     string before;
     GameManager gameManager;
     // Start is called before the first frame update
@@ -29,9 +29,9 @@ public class StartLostKattle : MonoBehaviour
         Vector3 pos = this.gameObject.transform.position;
         switch (tile)
         {
-            case "first":
-                this.gameObject.transform.position = new Vector3(pos.x, pos.y + move, pos.z);
-                break;
+            //case "first":
+            //    this.gameObject.transform.position = new Vector3(pos.x, pos.y + move, pos.z);
+            //    break;
 
 
             case "left":
@@ -76,9 +76,49 @@ public class StartLostKattle : MonoBehaviour
                         break;
                 }
                 break;
+
+            case "forward":
+                switch (before)
+                {
+                    case "forward":
+                        this.gameObject.transform.position = new Vector3(pos.x, pos.y + move, pos.z);
+                        break;
+
+                    case "right":
+                        this.gameObject.transform.position = new Vector3(pos.x + move, pos.y, pos.z);
+                        break;
+
+                    case "left":
+                        this.gameObject.transform.position = new Vector3(pos.x - move, pos.y, pos.z);
+                        break;
+
+                    case "down":
+                        this.gameObject.transform.position = new Vector3(pos.x, pos.y - move, pos.z);
+                        break;
+                }
+                break;
+
+            case "down":
+                switch (before)
+                {
+                    case "forward":
+                        this.gameObject.transform.position = new Vector3(pos.x, pos.y + move, pos.z);
+                        break;
+
+                    case "right":
+                        this.gameObject.transform.position = new Vector3(pos.x + move, pos.y, pos.z);
+                        break;
+
+                    case "left":
+                        this.gameObject.transform.position = new Vector3(pos.x - move, pos.y, pos.z);
+                        break;
+
+                    case "down":
+                        this.gameObject.transform.position = new Vector3(pos.x, pos.y - move, pos.z);
+                        break;
+                }
+                break;
         }
-
-
 
     }
 
@@ -142,7 +182,29 @@ public class StartLostKattle : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             gameManager.EnemyHit(damage);
-        }    
+        }
+
+        //ï«Ç…ìñÇΩÇ¡ÇΩéûÇÃèàóù
+        if (collision.gameObject.tag == "Wall")
+        {
+            tile = "down";
+
+            switch (before)
+            {
+                case "forward":
+                    before = "down";
+                    break;
+                case "right":
+                    before = "left";
+                    break;
+                case "left":
+                    before = "right";
+                    break;
+                case "down":
+                    before = "forward";
+                    break;
+            }
+        }
     }
  }
 

@@ -7,7 +7,6 @@ public class Goal : MonoBehaviour
 {
     private bool firstPush_next = false;
     private bool firstPush_exit = false;
-    [SerializeField] private string last_stage;
     private string now_stage;
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -28,6 +27,8 @@ public class Goal : MonoBehaviour
             string next_stage = "stage" + (int.Parse(now_stage) + 1).ToString();
 
             SceneManager.LoadScene(next_stage);
+            
+            
 
         }
     }
