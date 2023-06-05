@@ -34,15 +34,6 @@ public class Goal : MonoBehaviour
     }
     public void Finish()
     {
-        if (!firstPush_exit)
-        {
-            Debug.Log("ゲームが終了しました");
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
-#else
-                Application.Quit();//ゲームプレイ終了
-#endif
-            firstPush_exit = true;
-        }
+        SceneManager.LoadScene("TitleScene");
     }
 }
