@@ -8,10 +8,14 @@ using UnityEngine.UI;
 public class ItemDrag_LeftTile : MonoBehaviour, IDragHandler, IDropHandler
 {
     [SerializeField] private GameObject prehab;
-    [SerializeField] private RectTransform ui_pos;
-    //èâä˙à íu
-    private RectTransform start_pos;
+    private Vector3 res_posw = Vector3.zero;
+    private RectTransform ui_pos;
 
+    void Start()
+    {
+        ui_pos = GetComponent<RectTransform>();
+        res_posw = gameObject.transform.position;
+    }
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -27,8 +31,10 @@ public class ItemDrag_LeftTile : MonoBehaviour, IDragHandler, IDropHandler
         target.z = 0;
         Instantiate(prehab,target,transform.rotation);
 
-        RectTransform rectTransform = GetComponent<RectTransform>();
-        rectTransform.position = ui_pos.position;
+        //èâä˙à íuÇ…ñﬂÇ∑
+        //RectTransform rectTransform = GetComponent<RectTransform>();
+        ui_pos.position = res_posw;
+
     }
 
 }
