@@ -12,16 +12,22 @@ public class GameManager : MonoBehaviour
     GameObject stage_name;
     GameObject time;
     private float timer;
+    public static float score;
+    float score_now;
 
     private void Start()
     {
         stage_name = GameObject.Find("StageName");
         time = GameObject.Find ("Time");
         timer = 0;
+
+        score_now = score;
     }
     // Update is called once per frame
     void Update()
     {
+        score = 0;
+
         Text stage_name_text = stage_name.GetComponent<Text>();
         stage_name_text.text = SceneManager.GetActiveScene().name;
 
@@ -33,6 +39,10 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+
+        float score_this = 1000 - timer;
+
+        score = score_now + score_this;
     }
 
     public void EnemyHit(int damage)
