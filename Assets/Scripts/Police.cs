@@ -1,26 +1,18 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class StartLostKattle : MonoBehaviour
+public class Police : MonoBehaviour
 {
-    [SerializeField] GameObject LostKattle;
+    [SerializeField] GameObject enemy1;
     [SerializeField] public float move = 0.01f;
-    [SerializeField] int damage = 1;
-    public static string sceen_name;
-    string tile = "forward";
+    string tile = "first";
     string before;
-    GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
-        before = "forward";
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        sceen_name = SceneManager.GetActiveScene().name;
+        tile = "forward";
+        before = "right";
     }
 
     // Update is called once per frame
@@ -29,10 +21,6 @@ public class StartLostKattle : MonoBehaviour
         Vector3 pos = this.gameObject.transform.position;
         switch (tile)
         {
-            //case "first":
-            //    this.gameObject.transform.position = new Vector3(pos.x, pos.y + move, pos.z);
-            //    break;
-
 
             case "left":
                 switch (before)
@@ -77,6 +65,7 @@ public class StartLostKattle : MonoBehaviour
                 }
                 break;
 
+
             case "forward":
                 switch (before)
                 {
@@ -119,7 +108,6 @@ public class StartLostKattle : MonoBehaviour
                 }
                 break;
         }
-
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -178,14 +166,8 @@ public class StartLostKattle : MonoBehaviour
             }
         }
 
-        //ìGÇ…è’ìÀÇµÇΩéûÇÃèàóù
-        if (collision.gameObject.tag == "Enemy")
-        {
-            gameManager.EnemyHit(damage);
-        }
-
         //ï«Ç…ìñÇΩÇ¡ÇΩéûÇÃèàóù
-        if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Police")
+        if (collision.gameObject.tag == "Wall")
         {
             tile = "down";
 
@@ -205,6 +187,10 @@ public class StartLostKattle : MonoBehaviour
                     break;
             }
         }
-    }
- }
 
+        if(collision.gameObject.tag == "Enemy")
+        {
+            Destroy(collision.gameObject);
+        }
+    }
+}
