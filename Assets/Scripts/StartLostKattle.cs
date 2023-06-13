@@ -14,6 +14,8 @@ public class StartLostKattle : MonoBehaviour
     public static string sceen_name;
     string tile = "forward";
     string before;
+    string player_condition = "normal";
+    int confusion_count;
     GameManager gameManager;
     // Start is called before the first frame update
     void Start()
@@ -29,10 +31,7 @@ public class StartLostKattle : MonoBehaviour
         Vector3 pos = this.gameObject.transform.position;
         switch (tile)
         {
-            //case "first":
-            //    this.gameObject.transform.position = new Vector3(pos.x, pos.y + move, pos.z);
-            //    break;
-
+            
 
             case "left":
                 switch (before)
@@ -206,5 +205,15 @@ public class StartLostKattle : MonoBehaviour
             }
         }
     }
- }
+
+    //public void OnTriggerEnter(Collider collider)
+    //{
+    //    if(collider.gameObject.tag == "Confusion")
+    //    {
+    //        player_condition = "confusion";
+    //        confusion_count = 3;
+    //    }
+    //}
+
+}
 

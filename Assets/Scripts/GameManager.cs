@@ -11,38 +11,41 @@ public class GameManager : MonoBehaviour
     string scean_name;
     GameObject stage_name;
     GameObject time;
+    GameObject score_text;
     private float timer;
     public static float score;
-    float score_now;
+    public static float score_before;
+
 
     private void Start()
     {
         stage_name = GameObject.Find("StageName");
         time = GameObject.Find ("Time");
+        score_text = GameObject.Find("Score");
         timer = 0;
 
-        score_now = score;
+        score = 3000 + score_before;
     }
     // Update is called once per frame
     void Update()
     {
-        score = 0;
 
         Text stage_name_text = stage_name.GetComponent<Text>();
         stage_name_text.text = SceneManager.GetActiveScene().name;
 
         Text time_text = time.GetComponent<Text>();
         timer += Time.deltaTime;
-        time_text.text = timer.ToString("f2");
+        string timer_str = timer.ToString("f2");
+        time_text.text = "Time:" + timer_str;
 
         if (Input.GetButtonDown("Reset")) 
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
-        float score_this = 1000 - timer;
+        Text score_text_text = score_text.GetComponent<Text>();
+        score_text_text.text = score.ToString();
 
-        score = score_now + score_this;
     }
 
     public void EnemyHit(int damage)
@@ -56,5 +59,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-      
+    public void ScoreDown()
+    {
+        score = score - 100;
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Goal")
+        {
+            score_before = score;
+        }
+    }
 }
