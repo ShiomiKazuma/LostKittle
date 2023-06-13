@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using static UnityEditor.PlayerSettings;
 
-public class Enemy1 : MonoBehaviour
+public class EnemyVartical : MonoBehaviour
 {
     [SerializeField] GameObject enemy1;
     [SerializeField] public float move = 0.01f;
@@ -15,7 +15,7 @@ public class Enemy1 : MonoBehaviour
     void Start()
     {
         tile = "forward";
-        before = "right";
+        before = "forward";
     }
 
     // Update is called once per frame
@@ -197,5 +197,5 @@ public class Enemy1 : MonoBehaviour
         }
     }
 
-    
+
 }
