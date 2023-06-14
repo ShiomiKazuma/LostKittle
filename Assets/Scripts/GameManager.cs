@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     GameObject time;
     GameObject score_text;
     private float timer;
-    public static float score;
-    public static float score_before;
+    public static int score;
+    public static int score_before;
 
 
     private void Start()
@@ -46,6 +46,10 @@ public class GameManager : MonoBehaviour
         Text score_text_text = score_text.GetComponent<Text>();
         score_text_text.text = score.ToString();
 
+        if (score <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
     }
 
     public void EnemyHit(int damage)
@@ -64,11 +68,4 @@ public class GameManager : MonoBehaviour
         score = score - 100;
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Goal")
-        {
-            score_before = score;
-        }
-    }
 }

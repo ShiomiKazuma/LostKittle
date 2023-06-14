@@ -13,6 +13,7 @@ public class Goal : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            GameManager.score_before = GameManager.score;
             SceneManager.LoadScene("Goal");
         }
     }
