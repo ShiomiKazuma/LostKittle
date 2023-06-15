@@ -14,14 +14,19 @@ public class GameOver : MonoBehaviour
             //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             SceneManager.LoadScene(StartLostKattle.sceen_name);
             firstPush_retry = true;
-            Debug.Log("リトライしました");
+            //Debug.Log("リトライしました");
         }
 
     }
 
     public void Finish()
     {
-        SceneManager.LoadScene("TitleScene");
+        if (!firstPush_exit)
+        {
+            SceneManager.LoadScene("TitleScene");
+            firstPush_exit = true;
+        }
+        
     }
 
 }

@@ -14,7 +14,6 @@ public class StartLostKattle : MonoBehaviour
     public static string sceen_name;
     string tile = "forward";
     string before;
-    string player_condition = "normal";
     int confusion_count;
     GameManager gameManager;
     // Start is called before the first frame update
