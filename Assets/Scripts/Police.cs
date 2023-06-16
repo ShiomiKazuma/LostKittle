@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Police : MonoBehaviour
 {
-    [SerializeField] GameObject enemy1;
     [SerializeField] public float move = 0.01f;
     string tile = "first";
     string before;
@@ -191,6 +190,7 @@ public class Police : MonoBehaviour
         if(collision.gameObject.tag == "Enemy")
         {
             Destroy(collision.gameObject);
+            Destroy(gameObject);
         }
     }
 }

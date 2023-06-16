@@ -11,11 +11,13 @@ public class Enemy1 : MonoBehaviour
     [SerializeField] public float move = 0.01f;
     string tile = "first";
     string before;
+    int destory_point;
     // Start is called before the first frame update
     void Start()
     {
         tile = "forward";
         before = "right";
+        destory_point = 0;
     }
 
     // Update is called once per frame
@@ -145,6 +147,14 @@ public class Enemy1 : MonoBehaviour
 
 
             }
+
+            destory_point += 1;
+
+            if (destory_point >= 3) 
+            {
+                Destroy(collision.gameObject);
+                destory_point = 0;
+            }
         }
 
         //‰E‚É‹È‚ª‚é
@@ -171,6 +181,14 @@ public class Enemy1 : MonoBehaviour
                     break;
 
 
+            }
+
+            destory_point += 1;
+
+            if (destory_point >= 3)
+            {
+                Destroy(collision.gameObject);
+                destory_point = 0;
             }
         }
 

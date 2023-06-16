@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class ItemDrag_LeftTile : MonoBehaviour, IDragHandler, IDropHandler
 {
-    [SerializeField] private GameObject prehab;
+    [SerializeField] public GameObject prehab;
     private Vector3 res_posw = Vector3.zero;
     private RectTransform ui_pos;
     GameManager game_manager;
@@ -39,7 +39,15 @@ public class ItemDrag_LeftTile : MonoBehaviour, IDragHandler, IDropHandler
         //RectTransform rectTransform = GetComponent<RectTransform>();
         ui_pos.position = res_posw;
 
-        game_manager.ScoreDown();
+        if(prehab.name == "Police")
+        {
+            game_manager.ScoreDownPolice();
+        }
+        else
+        {
+            game_manager.ScoreDownTile();
+        }
+        
     }
 
 }

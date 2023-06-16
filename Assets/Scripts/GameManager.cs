@@ -63,9 +63,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ScoreDown()
+    public void ScoreDownTile()
     {
         score = score - 100;
+    }
+
+    public void ScoreDownPolice()
+    {
+        score = score - 1000;
     }
 
 }
