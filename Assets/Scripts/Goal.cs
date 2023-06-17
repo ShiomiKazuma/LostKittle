@@ -5,17 +5,27 @@ using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour
 {
+    GameObject goal_score;
     private bool firstPush_next = false;
     private bool firstPush_exit = false;
     private string now_stage;
-    private string stage_name;
+    public static int best_score;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             GameManager.score_before = GameManager.score;
-            SceneManager.LoadScene("Goal");
+            now_stage = StartLostKattle.sceen_name;
+            if (now_stage == "stage3")
+            {
+                SceneManager.LoadScene("Clear");
+            }
+            else
+            {
+                SceneManager.LoadScene("Goal");
+            }
+            
         }
     }
 
@@ -51,5 +61,16 @@ public class Goal : MonoBehaviour
             firstPush_exit = true;
         }
         
+    }
+
+    public void FinishTitle()
+    {
+        if(best_score > GameManager.score_before)
+        {
+            best_score = GameManager.score_before;
+        }
+        
+
+        SceneManager.LoadScene("TitleScene");
     }
 }

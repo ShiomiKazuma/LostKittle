@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     public static int score;
     public static int score_before;
 
-
     private void Start()
     {
         stage_name = GameObject.Find("StageName");
@@ -24,6 +23,10 @@ public class GameManager : MonoBehaviour
         score_text = GameObject.Find("Score");
         timer = 0;
 
+        if(SceneManager.GetActiveScene().name == "stage1")
+        {
+            score_before = 0;
+        }
         score = 3000 + score_before;
     }
     // Update is called once per frame
