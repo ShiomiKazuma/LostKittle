@@ -65,7 +65,7 @@ public class Goal : MonoBehaviour
 
     public void FinishTitle()
     {
-        if(best_score > GameManager.score_before)
+        if(best_score <= GameManager.score_before)
         {
             best_score = GameManager.score_before;
         }
