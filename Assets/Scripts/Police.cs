@@ -11,7 +11,7 @@ public class Police : MonoBehaviour
     void Start()
     {
         tile = "forward";
-        before = "right";
+        before = "forward";
     }
 
     // Update is called once per frame
