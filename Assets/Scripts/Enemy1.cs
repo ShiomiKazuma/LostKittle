@@ -18,10 +18,11 @@ public class Enemy1 : MonoBehaviour
         tile = "forward";
         before = "right";
         destory_point = 0;
+
+        
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         Vector3 pos = this.gameObject.transform.position;
         switch (tile)
@@ -119,6 +120,7 @@ public class Enemy1 : MonoBehaviour
 
 
     }
+
 
     public void OnCollisionEnter2D(Collision2D collision)
     {

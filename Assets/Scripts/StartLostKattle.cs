@@ -25,7 +25,7 @@ public class StartLostKattle : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         Vector3 pos = this.gameObject.transform.position;
         switch (tile)

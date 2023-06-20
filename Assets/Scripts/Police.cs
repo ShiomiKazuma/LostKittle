@@ -7,15 +7,19 @@ public class Police : MonoBehaviour
     [SerializeField] public float move = 0.01f;
     string tile = "first";
     string before;
+    GameManager gameManager;
+    AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
         tile = "forward";
         before = "forward";
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //audioSource = gameManager.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         Vector3 pos = this.gameObject.transform.position;
         switch (tile)
@@ -166,7 +170,7 @@ public class Police : MonoBehaviour
         }
 
         //ï«Ç…ìñÇΩÇ¡ÇΩéûÇÃèàóù
-        if (collision.gameObject.tag == "Wall")
+        if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Player")
         {
             tile = "down";
 
@@ -191,6 +195,7 @@ public class Police : MonoBehaviour
         {
             Destroy(collision.gameObject);
             Destroy(gameObject);
+            gameManager.EnemyDown();
         }
     }
 }

@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] int player_hp = 1;
     [SerializeField] GameObject canvas;
+    [SerializeField] AudioClip Sound1;
+    AudioSource audioSource;
     string scean_name;
     GameObject stage_name;
     GameObject time;
@@ -28,6 +30,8 @@ public class GameManager : MonoBehaviour
             score_before = 0;
         }
         score = 3000 + score_before;
+
+        audioSource = GetComponent<AudioSource>();
     }
     // Update is called once per frame
     void Update()
@@ -74,6 +78,11 @@ public class GameManager : MonoBehaviour
     public void ScoreDownPolice()
     {
         score = score - 1000;
+    }
+
+    public void EnemyDown()
+    {
+        audioSource.PlayOneShot(Sound1);
     }
 
 }
